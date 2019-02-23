@@ -9,6 +9,9 @@
     "shadow-nucleus": "z:\\shadow-nucleus"
   },
   "scripts": {
-    "nucleus:init":"yarn nc-setup"
+    "nucleus:init": "yarn nc-setup"
+  },
+  "devDependencies": {
+    "@types/node": "^11.9.5"
   }
 }

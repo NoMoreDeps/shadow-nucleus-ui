@@ -2,6 +2,7 @@
 node_modules
 out
 bin
+www
 
 # Nucleus dirs
 nc-packages
