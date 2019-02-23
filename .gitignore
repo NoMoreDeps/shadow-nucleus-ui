@@ -1,3 +1,8 @@
+# Global dirs
 node_modules
 out
 bin
+
+# Nucleus dirs
+nc-packages
+nc-scripts

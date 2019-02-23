@@ -2,5 +2,5 @@
 # yarn lockfile v1
 
 
-"shadow-nucleus@z:\\shadow-nucleus":
+"shadow-nucleus@file:../shadow-nucleus":
   version "1.0.0"
