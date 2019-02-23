@@ -15,13 +15,19 @@ function createDir(path: string) {
 
 createDir("./dist");
 createDir("./dist/packages");
-copySync("./nc-packages/modules/nc-logging", "./dist/packages/nc-logging")
-copySync("./nc-packages/modules/nucleus.bootNode.js", "./dist/packages")
-copySync("./nc-packages/modules/nucleus.bootWeb.js", "./dist/packages")
-copySync("./assets/modules.conf.node.json", "./dist/modules.conf.node.json")
-copySync("./assets/modules.conf.web.json", "./dist/modules.conf.web.json")
+copySync("./nc-packages/modules/nc-logging", "./dist/packages/nc-logging");
+copySync("./nc-packages/modules/nucleus.bootNode.js", "./dist/packages");
+copySync("./nc-packages/modules/nucleus.bootWeb.js", "./dist/packages");
+copySync("./nc-packages/modules/nucleus.web.js", "./dist/packages");
+copySync("./nc-packages/modules/nucleus.node.js", "./dist/packages");
+copySync("./dist/nucleus-ui", "./dist/packages/nucleus-ui");
+
+copySync("z:/shadow-nucleus-plugins/dist", "./dist/packages");
+
+copySync("./assets/modules.conf.node.json", "./dist/packages");
+copySync("./assets/modules.conf.web.json", "./dist/packages");
+copySync("./assets/index.html", "./dist");
 
 createDir("./www");
 copySync("./dist/packages","./www/packages");
-copySync("./dist/modules.conf.node.json","./www/modules.conf.node.json");
-copySync("./dist/modules.conf.web.json","./www/modules.conf.web.json");
+copySync("./dist/index.html","./www");

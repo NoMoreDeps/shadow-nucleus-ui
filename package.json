@@ -6,12 +6,20 @@
   "author": "fskorzec <fskorzec@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "shadow-nucleus": "z:\\shadow-nucleus"
+    "shadow-nucleus": "z:/shadow-nucleus",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "scripts": {
-    "nucleus:init": "yarn nc-setup"
+    "nucleus:init": "yarn nc-setup",
+    "nucleus:reset": "yarn remove shadow-nucleus && yarn add z:/shadow-nucleus && yarn nucleus:init",
+    "deploy:build": "tsc -p ./scripts && node scripts/deploy.js",
+    "deploy": "node scripts/deploy.js",
+    "nucleus:ui":"yarn nc-build ./src/nucleus-ui nucleus-ui nucleus-ui 1.0.0 web"
   },
   "devDependencies": {
-    "@types/node": "^11.9.5"
+    "@types/node": "^11.9.5",
+    "@types/react": "^16.8.4",
+    "@types/react-dom": "^16.8.2"
   }
 }
