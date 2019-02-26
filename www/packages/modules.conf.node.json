@@ -1,0 +1,8 @@
+{
+  "modules": [
+    {"path": "nc-logging/1.0.0/back/nc-logging.js"},
+    {"path": "hapi/18.0.0/back/hapi.js"},
+    {"path": "nes/10.0.0/back/nes.js"},
+    {"path": "nucleus-back/1.0.0/back/nucleus-back.js"}
+  ]
+}

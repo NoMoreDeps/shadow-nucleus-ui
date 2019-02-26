@@ -2,7 +2,6 @@
 node_modules
 out
 bin
-www
 dist
 
 # Nucleus dirs
