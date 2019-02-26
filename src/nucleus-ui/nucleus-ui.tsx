@@ -9,6 +9,7 @@ import {
 import * as _React from "react";
 import * as _ReactDOM from "react-dom";
 import * as _M from "@material-ui/core";
+import * as _Nes from "nes";
 import { CSSProperties } from "jss/css";
 
 const styles = {
@@ -46,6 +47,7 @@ class ModuleEntryPoint implements IModuleEntryPoint {
     const React    = await api.Service.getService<typeof _React>("react", "com.nucleus");
     const ReactDOM = await api.Service.getService<typeof _ReactDOM>("react-dom", "com.nucleus");
     const M = await api.Service.getService<typeof _M>("material-ui/core","com.nucleus");
+    const nes = await api.Service.getService<typeof _Nes>("nes","com.nucleus");
 
     const entryPoint = document.querySelector("#nucleus-app");
 
@@ -96,6 +98,18 @@ class ModuleEntryPoint implements IModuleEntryPoint {
         </div>
       </React.Fragment>
       ), entryPoint);
+
+
+      var client = new nes.Client('ws://localhost');
+
+const start = async () => {
+
+    await client.connect();
+    const payload = await client.request('hello');  // Can also request '/h'
+    // payload -> 'world!'
+};
+
+start();
   }
 }
 

@@ -41,6 +41,19 @@ export default class extends BaseComponent {
 
     const start = async () => {
       await server.register(inert);
+      await server.register(nes);
+
+      server.route({
+        method: 'GET',
+        path: '/h',
+        config: {
+            id: 'hello',
+            handler: (request: _hapi.Request, h: any) => {
+
+                return 'world!';
+            }
+        }
+    } as any);
   
       server.route({
         method: 'GET',
@@ -52,6 +65,8 @@ export default class extends BaseComponent {
             }
         }
     });
+
+    
   
       await server.start();
   
