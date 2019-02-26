@@ -7,6 +7,9 @@
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "@types/hapi": "^18.0.1",
+    "@types/inert": "^5.1.2",
+    "@types/nes": "^7.0.6",
     "shadow-nucleus": "z:/shadow-nucleus",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
@@ -16,7 +19,8 @@
     "nucleus:reset": "yarn remove shadow-nucleus && yarn add z:/shadow-nucleus && yarn nucleus:init",
     "deploy:build": "tsc -p ./scripts && node scripts/deploy.js",
     "deploy": "node scripts/deploy.js",
-    "nucleus:ui": "yarn nc-build ./src/nucleus-ui nucleus-ui nucleus-ui 1.0.0 web"
+    "nucleus:ui": "yarn nc-build ./src/nucleus-ui nucleus-ui nucleus-ui 1.0.0 web",
+    "nucleus:back": "yarn nc-build ./src/nucleus-back nucleus-back nucleus-back 1.0.0 node"
   },
   "devDependencies": {
     "@types/node": "^11.9.5",
