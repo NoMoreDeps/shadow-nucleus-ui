@@ -19,7 +19,7 @@
     "nucleus:reset": "yarn remove shadow-nucleus && yarn add z:/shadow-nucleus && yarn nucleus:init",
     "deploy:build": "tsc -p ./scripts && node scripts/deploy.js",
     "deploy": "node scripts/deploy.js",
-    "nucleus:ui": "yarn nc-build ./src/nucleus-ui nucleus-ui nucleus-ui 1.0.0 web",
+    "nucleus:ui":   "yarn nc-build ./src/nucleus-ui nucleus-ui nucleus-ui 1.0.0 web",
     "nucleus:back": "yarn nc-build ./src/nucleus-back nucleus-back nucleus-back 1.0.0 node"
   },
   "devDependencies": {

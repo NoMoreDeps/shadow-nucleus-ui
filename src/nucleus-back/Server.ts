@@ -7,6 +7,8 @@ import {
 import * as _hapi  from "hapi"  ;
 import * as _nes   from "nes"   ;
 import * as _inert from "inert" ;
+import nes = require("nes");
+import { IWebSocketService } from "./packages/websocket/back/IWebSocketService";
 
 /**
  * If you want to use some constant as enum for your own events, you can declare them as following
@@ -30,8 +32,8 @@ export default class extends BaseComponent {
   }
 
   async startServer() {
+    const websocket = await this.getService<IWebSocketService>("websocket","com.nucleus");
     const hapi   = await this.getService<typeof _hapi>("hapi", "com.nucleus")   ;
-    const nes    = await this.getService<typeof _nes>("nes", "com.nucleus")     ;
     const inert  = await this.getService<typeof _inert>("inert", "com.nucleus") ;
 
     const server = (hapi as any).server({
@@ -41,20 +43,22 @@ export default class extends BaseComponent {
 
     const start = async () => {
       await server.register(inert);
-      await server.register(nes);
+      await server.register(websocket.getHapiPluginregistrationManifest());
 
       server.route({
         method: 'GET',
-        path: '/h',
-        config: {
-            id: 'hello',
-            handler: (request: _hapi.Request, h: any) => {
-
-                return 'world!';
+        path: '/event',
+        handler: (r,h) => {
+          this._send("AAA.BBB.CCC", {
+            sender: this.identity,
+            payload: {
+              message: "JKJKLJSLJKSLJSLJS"
             }
+          })
+          return null;
         }
-    } as any);
-  
+      });
+
       server.route({
         method: 'GET',
         path: '/{param*}',
@@ -64,14 +68,12 @@ export default class extends BaseComponent {
                 listing: true
             }
         }
-    });
-
+      });
     
-  
       await server.start();
-  
+
       console.log('Server running at:', server.info.uri);
-  };
+    };
   
   start();
   }

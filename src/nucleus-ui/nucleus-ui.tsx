@@ -9,8 +9,7 @@ import {
 import * as _React from "react";
 import * as _ReactDOM from "react-dom";
 import * as _M from "@material-ui/core";
-import * as _Nes from "nes";
-import { CSSProperties } from "jss/css";
+import { IWebSocketService } from "./packages/websocket/front/IWebSocketService";
 
 const styles = {
   root: {
@@ -47,7 +46,7 @@ class ModuleEntryPoint implements IModuleEntryPoint {
     const React    = await api.Service.getService<typeof _React>("react", "com.nucleus");
     const ReactDOM = await api.Service.getService<typeof _ReactDOM>("react-dom", "com.nucleus");
     const M = await api.Service.getService<typeof _M>("material-ui/core","com.nucleus");
-    const nes = await api.Service.getService<typeof _Nes>("nes","com.nucleus");
+    const websocket = await api.Service.getService<IWebSocketService>("websocket","com.nucleus");
 
     const entryPoint = document.querySelector("#nucleus-app");
 
@@ -100,16 +99,23 @@ class ModuleEntryPoint implements IModuleEntryPoint {
       ), entryPoint);
 
 
-      var client = new nes.Client('ws://localhost');
+      (async () => {
+        websocket.coreMessage("CLIENT.MESSAGE.SEND", {
+          sender:{
+            cmpId:"com.nucleus",
+            cmpName:"ui"
+          },
+          payload: {
 
-const start = async () => {
+          }
+        });
 
-    await client.connect();
-    const payload = await client.request('hello');  // Can also request '/h'
-    // payload -> 'world!'
-};
+        websocket.coreReceive("AAA.BBB.CCC", (data) => {
+          console.info("Just received new data",data)
+        })
+      })();
 
-start();
+
   }
 }
 
