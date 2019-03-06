@@ -7,6 +7,7 @@
     {"path": "nes/10.0.0/front/nes.js"},
     {"path": "websocket/1.0.0/front/websocket.js"},
     {"path": "upload/1.0.0/front/upload.js"},
+    {"path": "nucleus-upload/1.0.0/front/nucleus-upload.js"},
     {"path": "nucleus-ui/1.0.0/front/nucleus-ui.js"}
   ]
 }

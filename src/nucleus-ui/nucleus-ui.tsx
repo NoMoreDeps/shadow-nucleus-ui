@@ -51,18 +51,17 @@ class ModuleEntryPoint implements IModuleEntryPoint {
     const websocket = await api.Service.getService<IWebSocketService>("websocket","com.nucleus");
     const IFileStreamer = await api.Service.getService<IFileStreamer>("filestreamer","com.nucleus");
     const IUploadService = await api.Service.getService<IUploadService>("upload","com.nucleus");
-    
+    const UploadCmp = await api.Service.getService<React.ComponentType<any>>("ui.upload", "com.nucleus.components");
 
     const entryPoint = document.querySelector("#nucleus-app");
 
-    const {Grid, Paper, AppBar, Toolbar, Typography, Button, CssBaseline, Drawer, Divider, List, ListItem, ListItemText, Hidden} = M;
+    const {Grid, Paper, AppBar, Toolbar, Typography, Button, CssBaseline, Drawer, Divider, List, ListItem, ListItemText, Hidden, LinearProgress} = M;
 
     const appBar = <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" color="inherit" style={{flexGrow:1}}>
-          News
+          Nucleus - UI - Demo
         </Typography>
-        <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>;
 
@@ -71,15 +70,7 @@ class ModuleEntryPoint implements IModuleEntryPoint {
           <div  />
           <Divider />
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            {['Upload Service'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemText primary={text} />
               </ListItem>
@@ -88,61 +79,27 @@ class ModuleEntryPoint implements IModuleEntryPoint {
         </Paper>
       </Hidden>;
 
+    type AppState = {
+      name: string;
+      size: number;
+      pct: number;
+    }
 
 
     ReactDOM.render((
       <React.Fragment>
-        <CssBaseline />
-        { appBar }
-        <div style={{...styles.root}}>
-          { drawer }
-            <Grid container style={{margin:5}}>
-              <Grid item>
-              <input
-                style={{ display: 'none' }}
-                id="raised-button-file"
-                onChange={(evt) => {
-                  (async () => {
-
-                    if (evt && evt.target && evt.target.files) {
-                      const fs = new IFileStreamer(evt.target.files[0]);
-                      
-                      const guid = await IUploadService.openSession({name: fs.name, size: evt.target.files[0].size});
-                      await IUploadService.closeSession(guid);
-                    }
-                  })();
-                }}
-                type="file"
-              />
-              <label htmlFor="raised-button-file">
-                <Button variant="raised" component="span" >
-                  Upload
-                </Button>
-              </label> 
-              </Grid>
+      <CssBaseline />
+      { appBar }
+      <div style={{...styles.root}}>
+        { drawer }
+          <Grid container style={{margin:5}}>
+            <Grid item>
+              <UploadCmp />
             </Grid>
-        </div>
-      </React.Fragment>
+          </Grid>
+      </div>
+    </React.Fragment>
       ), entryPoint);
-
-
-      (async () => {
-        websocket.coreMessage("CLIENT.MESSAGE.SEND", {
-          sender:{
-            cmpId:"com.nucleus",
-            cmpName:"ui"
-          },
-          payload: {
-
-          }
-        });
-
-        websocket.coreReceive("AAA.BBB.CCC", (data) => {
-          console.info("Just received new data",data)
-        })
-      })();
-
-
   }
 }
 

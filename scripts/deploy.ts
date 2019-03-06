@@ -21,6 +21,7 @@ copySync("./nc-packages/modules/nucleus.bootWeb.js", "./dist/packages");
 copySync("./nc-packages/modules/nucleus.web.js", "./dist/packages");
 copySync("./nc-packages/modules/nucleus.node.js", "./dist/packages");
 copySync("./dist/nucleus-ui", "./dist/packages/nucleus-ui");
+copySync("./dist/nucleus-upload", "./dist/packages/nucleus-upload");
 copySync("./dist/nucleus-back", "./dist/packages/nucleus-back");
 
 copySync("z:/shadow-nucleus-plugins/dist", "./dist/packages");
