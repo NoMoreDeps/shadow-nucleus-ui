@@ -22,7 +22,7 @@
     "nucleus:upload": "yarn nc-build ./src/nucleus-upload nucleus-upload nucleus-upload 1.0.0 web",
     "nucleus:ui": "yarn nc-build ./src/nucleus-ui nucleus-ui nucleus-ui 1.0.0 web",
     "nucleus:back": "yarn nc-build ./src/nucleus-back nucleus-back nucleus-back 1.0.0 node",
-    "nucleus:all":"yarn nucleus:ui && yarn nucleus:upload"
+    "nucleus:all":"yarn nucleus:back && yarn nucleus:ui && yarn nucleus:upload"
   },
   "devDependencies": {
     "@types/node": "^11.9.5",

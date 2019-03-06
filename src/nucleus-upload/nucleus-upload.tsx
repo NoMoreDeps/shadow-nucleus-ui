@@ -27,13 +27,14 @@ class ModuleEntryPoint implements IModuleEntryPoint {
     const IFileStreamer = await api.Service.getService<IFileStreamer>("filestreamer","com.nucleus");
     const IUploadService = await api.Service.getService<IUploadService>("upload","com.nucleus");
 
-    const {Grid, Paper, AppBar, Toolbar, Typography, Button, CssBaseline, Drawer, Divider, List, ListItem, ListItemText, Hidden, LinearProgress} = M;
+    const {Grid, Paper, AppBar, Toolbar, Typography, Button, CssBaseline, Drawer, Divider, List, ListItem, ListItemText, Hidden, LinearProgress, Snackbar} = M;
 
 
     type AppState = {
       name: string;
       size: number;
       pct: number;
+      open:boolean;
     }
 
     class App extends React.Component<{}, AppState>{
@@ -42,7 +43,8 @@ class ModuleEntryPoint implements IModuleEntryPoint {
         this.state = {
           name: "",
           pct:0,
-          size:0
+          size:0,
+          open:false
         }
       }
     
@@ -78,6 +80,12 @@ class ModuleEntryPoint implements IModuleEntryPoint {
                     }
 
                     await IUploadService.closeSession(guid);
+                    setTimeout(() => {
+                      this.setState({open: true})
+                    }, 700); 
+                    setTimeout(() => {
+                      this.setState({open: false})
+                    }, 3000); 
                   }
                 })();
               }}
@@ -100,6 +108,15 @@ class ModuleEntryPoint implements IModuleEntryPoint {
                 </Button>
               </label> 
             </div>
+            <Snackbar
+          anchorOrigin={{ vertical:"top", horizontal:"right" }}
+          open={this.state.open}
+          onClose={() => this.setState({open:false})}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">Upload of {this.state.name} is completed.</span>}
+        />
         </React.Fragment>
       }
     }

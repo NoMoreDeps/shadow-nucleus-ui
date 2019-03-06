@@ -2725,7 +2725,7 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-"shadow-nucleus@z:/shadow-nucleus":
+"shadow-nucleus@file:../shadow-nucleus":
   version "1.0.0"
 
 shebang-command@^1.2.0:
