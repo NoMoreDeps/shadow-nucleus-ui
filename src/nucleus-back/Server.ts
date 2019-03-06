@@ -33,31 +33,16 @@ export default class extends BaseComponent {
 
   async startServer() {
     const websocket = await this.getService<IWebSocketService>("websocket","com.nucleus");
-    const hapi   = await this.getService<typeof _hapi>("hapi", "com.nucleus")   ;
-    const inert  = await this.getService<typeof _inert>("inert", "com.nucleus") ;
+    const hapi      = await this.getService<typeof _hapi>("hapi", "com.nucleus")   ;
+    const inert     = await this.getService<typeof _inert>("inert", "com.nucleus") ;
 
     const server = (hapi as any).server({
       port: 8080
     }) as _hapi.Server;
 
-
     const start = async () => {
       await server.register(inert);
       await server.register(websocket.getHapiPluginregistrationManifest());
-
-      server.route({
-        method: 'GET',
-        path: '/event',
-        handler: (r,h) => {
-          this._send("AAA.BBB.CCC", {
-            sender: this.identity,
-            payload: {
-              message: "JKJKLJSLJKSLJSLJS"
-            }
-          })
-          return null;
-        }
-      });
 
       server.route({
         method: 'GET',
@@ -71,7 +56,6 @@ export default class extends BaseComponent {
       });
     
       await server.start();
-
       console.log('Server running at:', server.info.uri);
     };
   

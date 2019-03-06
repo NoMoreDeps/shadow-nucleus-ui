@@ -26,19 +26,6 @@ const styles = {
   }
 } as { [idex: string] : React.CSSProperties};
 
-/**
- * If you want to use some constant as enum for your own events, you can declare them as following
- * The constantTree function will fill every string value with the recursiv path
- const constants = {
-   SOME_KEY: "",
-   SOME_OTHER_KEY: {
-     SOME_NESTED_KEY:""
-    }
-  } 
-  
-  UtilConstant.constantTree(constants)
- */
-
 class ModuleEntryPoint implements IModuleEntryPoint {
   constructor() {
 
@@ -84,7 +71,6 @@ class ModuleEntryPoint implements IModuleEntryPoint {
       size: number;
       pct: number;
     }
-
 
     ReactDOM.render((
       <React.Fragment>

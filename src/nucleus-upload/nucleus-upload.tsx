@@ -70,7 +70,6 @@ class ModuleEntryPoint implements IModuleEntryPoint {
                       await IUploadService.sendChunk(guid, array);
                       
                         setTimeout(() => {
-
                           this.setState({
                             pct: this.state.pct + array.length
                           });
