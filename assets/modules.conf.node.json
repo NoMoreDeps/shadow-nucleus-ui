@@ -4,6 +4,7 @@
     {"path": "hapi/18.0.0/back/hapi.js"},
     {"path": "nes/10.0.0/back/nes.js"},
     {"path": "nucleus-back/1.0.0/back/nucleus-back.js"},
+    {"path": "upload/1.0.0/back/upload.js"},
     {"path": "websocket/1.0.0/back/websocket.js"}
   ]
 }

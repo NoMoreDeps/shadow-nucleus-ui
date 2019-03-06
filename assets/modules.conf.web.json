@@ -6,6 +6,7 @@
     {"path": "material-ui/3.9.0/front/material-ui.js"},
     {"path": "nes/10.0.0/front/nes.js"},
     {"path": "websocket/1.0.0/front/websocket.js"},
+    {"path": "upload/1.0.0/front/upload.js"},
     {"path": "nucleus-ui/1.0.0/front/nucleus-ui.js"}
   ]
 }

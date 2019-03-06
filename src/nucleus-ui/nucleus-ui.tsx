@@ -10,6 +10,8 @@ import * as _React from "react";
 import * as _ReactDOM from "react-dom";
 import * as _M from "@material-ui/core";
 import { IWebSocketService } from "./packages/websocket/front/IWebSocketService";
+import {IFileStreamer} from "./packages/upload/front/IFileStreamer";
+import {IUploadService} from "./packages/upload/front/IUploadService";
 
 const styles = {
   root: {
@@ -47,6 +49,9 @@ class ModuleEntryPoint implements IModuleEntryPoint {
     const ReactDOM = await api.Service.getService<typeof _ReactDOM>("react-dom", "com.nucleus");
     const M = await api.Service.getService<typeof _M>("material-ui/core","com.nucleus");
     const websocket = await api.Service.getService<IWebSocketService>("websocket","com.nucleus");
+    const IFileStreamer = await api.Service.getService<IFileStreamer>("filestreamer","com.nucleus");
+    const IUploadService = await api.Service.getService<IUploadService>("upload","com.nucleus");
+    
 
     const entryPoint = document.querySelector("#nucleus-app");
 
@@ -92,7 +97,29 @@ class ModuleEntryPoint implements IModuleEntryPoint {
         <div style={{...styles.root}}>
           { drawer }
             <Grid container style={{margin:5}}>
-              <Grid item>Hello</Grid>
+              <Grid item>
+              <input
+                style={{ display: 'none' }}
+                id="raised-button-file"
+                onChange={(evt) => {
+                  (async () => {
+
+                    if (evt && evt.target && evt.target.files) {
+                      const fs = new IFileStreamer(evt.target.files[0]);
+                      
+                      const guid = await IUploadService.openSession({name: fs.name, size: evt.target.files[0].size});
+                      await IUploadService.closeSession(guid);
+                    }
+                  })();
+                }}
+                type="file"
+              />
+              <label htmlFor="raised-button-file">
+                <Button variant="raised" component="span" >
+                  Upload
+                </Button>
+              </label> 
+              </Grid>
             </Grid>
         </div>
       </React.Fragment>
