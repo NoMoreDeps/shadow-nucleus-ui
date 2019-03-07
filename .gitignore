@@ -3,6 +3,7 @@ node_modules
 out
 bin
 dist
+www/packages/__upload__
 
 # Nucleus dirs
 nc-packages
