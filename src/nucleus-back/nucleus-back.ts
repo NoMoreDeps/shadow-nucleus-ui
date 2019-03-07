@@ -11,7 +11,7 @@ import Server from "./Server";
 class ModuleEntryPoint implements IModuleEntryPoint {
 
   async entryPoint(api: IApi): Promise<void> {
-    const server = api.Service.activateService<Server>(Server);
+    const server = await api.Service.activateService<Server>(Server);
     
     await server.startServer();
   }

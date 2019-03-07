@@ -1,7 +1,6 @@
 import {
   BaseComponent,
-  UtilEnv,
-  UtilConstant
+  Ioc
 } from "shadow-nucleus";
 
 import * as _hapi  from "hapi"  ;
@@ -23,18 +22,27 @@ import { IWebSocketService } from "./packages/websocket/back/IWebSocketService";
   UtilConstant.constantTree(constants)
  */
 
+ type TServices = {
+  websocket : IWebSocketService ;
+  hapi      : typeof _hapi      ;
+  inert     : typeof _inert     ;
+ }
+
+@Ioc({
+  websocket : ["websocket" ,"com.nucleus"] ,
+  hapi      : ["hapi"      ,"com.nucleus"] ,
+  inert     : ["inert"     ,"com.nucleus"]
+})
 export default class extends BaseComponent {
   cmpId   = "Server"; // set the main id
   cmpName = "com.nucleus.ui"; // set teh main component name
 
-  constructor() {
+  constructor(private services: TServices) {
     super();
   }
 
   async startServer() {
-    const websocket = await this.getService<IWebSocketService>("websocket","com.nucleus");
-    const hapi      = await this.getService<typeof _hapi>("hapi", "com.nucleus")   ;
-    const inert     = await this.getService<typeof _inert>("inert", "com.nucleus") ;
+    const {websocket, hapi, inert} = this.services;
 
     const server = (hapi as any).server({
       port: 8080
